@@ -22,7 +22,7 @@ def check_Length():  ## method for checking input in regards to desired length o
                    
 
 def check_Chars():  ## method for checking input in regards to number of special character types
-    print("How many special characters would you like to include? (Between 0 to 2 types)")
+    print("How many special character types would you like to include? (Between 0 to 2 types)")
     failed = True
     while failed:
         try:
@@ -89,19 +89,20 @@ def generate_Password():  ## method for generating the password itself. varies b
         pass
 
     pool = string.ascii_letters + string.digits
+    arithmetic_operators = "+-*/"
 
     if use_arithmetic and use_punctuation:
         first_arith = random.randint(0, 3)
-        first_punc = random.randint(0, 3)
+        first_punc = random.randint(0, 31)
         pool += "+-*/" + string.punctuation
         password = "".join(random.choices(pool, k = pw_length - 2))
-        password = insert_char(password, first_arith)
-        password = insert_char(password, first_punc)
+        password = insert_char(password, arithmetic_operators[first_arith])
+        password = insert_char(password, string.punctuation[first_punc])
     elif use_punctuation:
-        first_punc = random.randint(0, 3)
+        first_punc = random.randint(0, 31)
         pool += string.punctuation
         password = "".join(random.choices(pool, k = pw_length - 1))
-        password = insert_char(password, first_punc)
+        password = insert_char(password, string.punctuation[first_punc])
     else:
         password = "".join(random.choices(pool, k = pw_length))
 
